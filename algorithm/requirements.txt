@@ -1,0 +1,3 @@
+py-opencv
+tensorflow>=1.6
+numpy
