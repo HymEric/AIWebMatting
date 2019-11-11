@@ -27,6 +27,7 @@ with gfile.FastGFile(output_graph_path, "rb") as f:
             if 'use_locking' in node.attr: del node.attr['use_locking']
     _ = tf.import_graph_def(output_graph_def, name="")
 sess = tf.Session()
+sess.run(tf.global_variables_initializer())
 
 
 def make(img_path, mask_path, output_path):
@@ -40,9 +41,7 @@ def make(img_path, mask_path, output_path):
 
 
 def run(input_img_path, output_img_path):
-    sess.run(tf.global_variables_initializer())
     input_tensor = sess.graph.get_tensor_by_name("image_holder:0")
-
     output_tensor = sess.graph.get_tensor_by_name("output/score:0")
 
     # img=Image.open(img_path)

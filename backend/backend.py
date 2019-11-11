@@ -7,9 +7,11 @@ import sys
 from flask import Flask, request
 from flask_cors import CORS
 
-import algorithm.measure_pb as measure_pb
+from algorithm import measure_pb
 
 app = Flask(__name__)
+# max file length 100MB
+app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024
 CORS(app)
 
 sys.path.append("../algorithm/")
@@ -31,12 +33,10 @@ def upload():
     filename = base64.b64encode(os.urandom(24)).decode('utf-8')
     file.save(os.path.join("./", filename))
 
-    measure_pb.run("", "")
+    measure_pb.run("../algorithm/inputs/test.png", "../algorithm/alpha_img_outputs/test_result.png")
     return json.dumps({
         "status": True,
-        "data": {
-            "http://aliyun.zhangzaizai.com:4800/download/1.jpg"
-        }
+        "data": "http://aliyun.zhangzaizai.com:4800/download/1.jpg"
     })
 
 
