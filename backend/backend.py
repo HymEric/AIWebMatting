@@ -1,5 +1,7 @@
 # decoding=utf-8
+import base64
 import json
+import os
 import sys
 
 from flask import Flask, request
@@ -22,6 +24,13 @@ def make_status_false(msg):
 
 @app.route('/api/v1/upload', methods=['GET', 'POST'])
 def upload():
+    file = request.files.get('file')
+    if not file:
+        return make_status_false("invalid_file")
+
+    filename = base64.b64encode(os.urandom(24)).decode('utf-8')
+    file.save(os.path.join("./", filename))
+
     measure_pb.run("", "")
     return json.dumps({
         "status": True,
@@ -31,4 +40,4 @@ def upload():
     })
 
 
-app.run(host='0.0.0.0', port=4800)
+app.run(host='0.0.0.0', port=4800, debug=True)
