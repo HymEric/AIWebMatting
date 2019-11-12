@@ -19,8 +19,8 @@ services:
     ports:
     - 4800:4800
     build:
-      context: .
-      dockerfile: Dockerfile_zju_ai_nginx
+      context: ..
+      dockerfile: docker/Dockerfile_zju_ai_nginx
 
 volumes:
   zju_ai_img:

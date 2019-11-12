@@ -40,7 +40,6 @@
                 contentType: false,
                 success: function (data) {
                     var obj = JSON.parse(data);
-                    if($("#imageReturn").attr("src",obj.data))
                     $("#imageReturn").attr("src",obj.data);
                     $('#imageReturn').attr("style","display:inline");
                 }
