@@ -5,15 +5,19 @@
     <title>matting</title>
 </head>
 <body>
-    <label for="fileupload" class="updata_file">点击这里上传图片</label>
-    <input type="file" id="fileupload" style="display: none" name="file" accept="image/jpeg,image/jpg,image/png">
-    <img src="" id="imageview" style="display: none">
-    <span class="btn btn-info" id="submitImage">上传</span>
-    <img src="" id="imageReturn" style="display: none">
+<div>
+    <img src="" id="imageview" class="image-wrap" style="display: none">
+    <img src="" id="imageReturn" class="image-wrap"  style="display: none">
     <span id="result"></span>
+</div>
+<div>
+    <label for="fileupload" class="btn">点击这里上传图片</label>
+    <input type="file" id="fileupload" style="display: none" name="file" accept="image/jpeg,image/jpg,image/png">
+    <span class="btn btn-danger" id="submitImage">上传</span>
+</div>
 <script type="text/javascript" src="jquery.js"></script>
 <script>
-    $("#fileupload").change(function() {
+    $("#fileupload").change(function () {
         var objUrl = $(this)[0].files[0];
         //获得一个http格式的url路径:mozilla(firefox)||webkit or chrome
         var windowURL = window.URL || window.webkitURL;
@@ -21,15 +25,15 @@
         var dataURL;
         dataURL = windowURL.createObjectURL(objUrl);
         //把url给图片的src，让其显示
-        $("#imageview").attr("src",dataURL);
-        $('#imageview').attr("style","display:inline");
+        $("#imageview").attr("src", dataURL);
+        $('#imageview').attr("style", "display:inline");
 
     });
     $("#submitImage").click(function () {
         var reader = new FileReader();
         var file = document.querySelector("#fileupload").files;
         reader.readAsBinaryString(file[0]);
-        reader.onload = function() {
+        reader.onload = function () {
             var formData = new FormData();
             formData.append("file", $("#fileupload")[0].files[0]);
             $.ajax({
@@ -40,18 +44,49 @@
                 contentType: false,
                 success: function (returnData) {
                     var json = JSON.parse(returnData);
-                    console.log(json.status);
-                    if(json.status) {
-                        $("#result").text(json);
+                    if (json.status) {
                         $("#imageReturn").attr("src", json.data);
                         $('#imageReturn').attr("style", "display:inline");
-                    } else{
-                        console.log(json);
+                    } else {
+                        $("#result").text(json.msg);
                     }
                 }
             });
         }
     });
 </script>
+<style type="text/css">
+    .btn {
+        position: relative;
+        display: inline-block;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        text-align: center;
+        vertical-align: middle;
+        font-weight: 400;
+        color: #fff;
+        background-color: #627aad;
+        border: 1px solid #627aad;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+
+    .btn:hover {
+        cursor: pointer;
+    }
+
+    .btn-danger {
+        background-color: #de815c;
+        border-color: #de815c;
+    }
+
+    .image-wrap {
+        overflow: hidden;
+        min-height: 120px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+</style>
 </body>
 </html>
