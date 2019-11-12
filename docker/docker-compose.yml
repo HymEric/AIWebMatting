@@ -6,6 +6,11 @@ services:
     hostname: zju_ai_backend
     ports:
     - 4800:4800
+    volumes:
+    - zju_ai_img:/tmp/zju_ai_img
     build:
       context: ..
       dockerfile: docker/Dockerfile
+
+volumes:
+  zju_ai_img:
