@@ -33,7 +33,7 @@ def upload():
     if not file:
         return make_status_false("invalid_file")
 
-    filename = base64.b64encode(os.urandom(24)).decode('utf-8') + ".png"
+    filename = base64.b64encode(os.urandom(24)).decode('utf-8').replace("/", "_") + ".png"
     file.save(os.path.join("/tmp/zju_ai_img/upload", filename))
 
     measure_pb.run(os.path.join("/tmp/zju_ai_img/upload", filename),
@@ -45,4 +45,4 @@ def upload():
     })
 
 
-app.run(host='0.0.0.0', port=4800)
+app.run(host='0.0.0.0', port=80)

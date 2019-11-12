@@ -4,13 +4,23 @@ services:
   zju_ai_backend:
     image: 127.0.0.1:5000/zsyh/zju_ai_backend
     hostname: zju_ai_backend
-    ports:
-    - 4800:4800
     volumes:
     - zju_ai_img:/tmp/zju_ai_img
     build:
       context: ..
-      dockerfile: docker/Dockerfile
+      dockerfile: docker/Dockerfile_zju_ai_backend
+  zju_ai_nginx:
+    depends_on:
+    - zju_ai_backend
+    image: 127.0.0.1:5000/zsyh/zju_ai_nginx
+    hostname: zju_ai_nginx
+    volumes:
+    - zju_ai_img:/tmp/zju_ai_img
+    ports:
+    - 4800:4800
+    build:
+      context: .
+      dockerfile: Dockerfile_zju_ai_nginx
 
 volumes:
   zju_ai_img:
