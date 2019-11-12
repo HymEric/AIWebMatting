@@ -11,7 +11,7 @@
     <span class="btn btn-info" id="submitImage">上传</span>
     <img src="" id="imageReturn" style="display: none">
     <span id="result"></span>
-<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="jquery.js"></script>
 <script>
     $("#fileupload").change(function() {
         var objUrl = $(this)[0].files[0];
@@ -38,10 +38,16 @@
                 data: formData,
                 processData: false,
                 contentType: false,
-                success: function (data) {
-                    var obj = JSON.parse(data);
-                    $("#imageReturn").attr("src",obj.data);
-                    $('#imageReturn').attr("style","display:inline");
+                success: function (returnData) {
+                    var json = JSON.parse(returnData);
+                    console.log(json.status);
+                    if(json.status) {
+                        $("#result").text(json);
+                        $("#imageReturn").attr("src", json.data);
+                        $('#imageReturn').attr("style", "display:inline");
+                    } else{
+                        console.log(json);
+                    }
                 }
             });
         }
