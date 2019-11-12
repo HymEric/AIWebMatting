@@ -41,7 +41,7 @@ def upload():
 
     return json.dumps({
         "status": True,
-        "data": "http://matting.zhangzaizai.com:4800/download/{}".format(filename)
+        "data": "http://matting.zsyhh.com:4800/download/{}".format(filename)
     })
 
 
