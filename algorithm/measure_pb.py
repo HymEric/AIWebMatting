@@ -7,11 +7,12 @@
 import tensorflow as tf
 import numpy as np
 from tensorflow.python.platform import gfile
-from PIL import Image
 import cv2
 
+from algorithm.definitions import absolute
+
 output_graph_def = tf.GraphDef()
-output_graph_path = '../algorithm/pb_model/matting_model.pb'
+output_graph_path = absolute('pb_model/matting_model.pb')
 
 with gfile.FastGFile(output_graph_path, "rb") as f:
     output_graph_def.ParseFromString(f.read())
@@ -72,9 +73,9 @@ def run(input_img_path, output_img_path):
 
 
 if __name__ == "__main__":
-    input_img_path = '../algorithm/inputs/test.png'
+    input_img_path = absolute('inputs/test.png')
     # mask_output_img_path='./outputs/test_result.png'
-    alpha_img_output_path = '../algorithm/alpha_img_outputs/test_result.png'
+    alpha_img_output_path = absolute('alpha_img_outputs/test_result.png')
     run(input_img_path, alpha_img_output_path)
 
     # make(input_img_path,mask_output_img_path,alpha_img_output_path)

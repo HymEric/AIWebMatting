@@ -8,6 +8,7 @@ from flask import Flask, request
 from flask_cors import CORS
 
 from algorithm import measure_pb
+from algorithm.definitions import absolute
 
 app = Flask(__name__)
 # max file length 100MB
@@ -33,7 +34,7 @@ def upload():
     filename = base64.b64encode(os.urandom(24)).decode('utf-8')
     file.save(os.path.join("./", filename))
 
-    measure_pb.run("../algorithm/inputs/test.png", "../algorithm/alpha_img_outputs/test_result.png")
+    measure_pb.run(absolute("inputs/test.png"), absolute("alpha_img_outputs/test_result.png"))
     return json.dumps({
         "status": True,
         "data": "http://aliyun.zhangzaizai.com:4800/download/1.jpg"
