@@ -43,7 +43,7 @@ Content-Type: image/png
 ```JSON
 {
   "status": true, 
-  "data": "http://matting.zhangzaizai.com:4800/download/7pG7qdfUpvcKN2i0YpuzIUVk9sGURtDu.png"
+  "data": "http://matting.zsyhh.com:4800/download/7pG7qdfUpvcKN2i0YpuzIUVk9sGURtDu.png"
 }
 ```
 
