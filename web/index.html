@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>matting</title>
+</head>
+<body>
+    <label for="fileupload" class="updata_file">点击这里上传图片</label>
+    <input type="file" id="fileupload" style="display: none" name="file" accept="image/jpeg,image/jpg,image/png">
+    <img src="" id="imageview" style="display: none">
+    <span class="btn btn-info" id="submitImage">上传</span>
+    <img src="" id="imageReturn" style="display: none">
+    <span id="result"></span>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script>
+    $("#fileupload").change(function() {
+        var objUrl = $(this)[0].files[0];
+        //获得一个http格式的url路径:mozilla(firefox)||webkit or chrome
+        var windowURL = window.URL || window.webkitURL;
+        //createObjectURL创建一个指向该参数对象(图片)的URL
+        var dataURL;
+        dataURL = windowURL.createObjectURL(objUrl);
+        //把url给图片的src，让其显示
+        $("#imageview").attr("src",dataURL);
+        $('#imageview').attr("style","display:inline");
+
+    });
+    $("#submitImage").click(function () {
+        var reader = new FileReader();
+        var file = document.querySelector("#fileupload").files;
+        reader.readAsBinaryString(file[0]);
+        reader.onload = function() {
+            var formData = new FormData();
+            formData.append("file", $("#fileupload")[0].files[0]);
+            $.ajax({
+                url: "http://matting.zsyhh.com:4800/api/v1/upload",
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    if($("#imageReturn").attr("src",obj.data))
+                    $("#imageReturn").attr("src",obj.data);
+                    $('#imageReturn').attr("style","display:inline");
+                }
+            });
+        }
+    });
+</script>
+</body>
+</html>
