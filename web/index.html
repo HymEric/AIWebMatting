@@ -5,88 +5,23 @@
     <title>matting</title>
 </head>
 <body>
-<div>
-    <img src="" id="imageview" class="image-wrap" style="display: none">
-    <img src="" id="imageReturn" class="image-wrap"  style="display: none">
-    <span id="result"></span>
-</div>
-<div>
-    <label for="fileupload" class="btn">点击这里上传图片</label>
-    <input type="file" id="fileupload" style="display: none" name="file" accept="image/jpeg,image/jpg,image/png">
-    <span class="btn btn-danger" id="submitImage">上传</span>
-</div>
 <script type="text/javascript" src="jquery.js"></script>
-<script>
-    $("#fileupload").change(function () {
-        var objUrl = $(this)[0].files[0];
-        //获得一个http格式的url路径:mozilla(firefox)||webkit or chrome
-        var windowURL = window.URL || window.webkitURL;
-        //createObjectURL创建一个指向该参数对象(图片)的URL
-        var dataURL;
-        dataURL = windowURL.createObjectURL(objUrl);
-        //把url给图片的src，让其显示
-        $("#imageview").attr("src", dataURL);
-        $('#imageview').attr("style", "display:inline");
-
-    });
-    $("#submitImage").click(function () {
-        var reader = new FileReader();
-        var file = document.querySelector("#fileupload").files;
-        reader.readAsBinaryString(file[0]);
-        reader.onload = function () {
-            var formData = new FormData();
-            formData.append("file", $("#fileupload")[0].files[0]);
-            $.ajax({
-                url: "http://matting.zsyhh.com:4800/api/v1/upload",
-                type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function (returnData) {
-                    var json = JSON.parse(returnData);
-                    if (json.status) {
-                        $("#imageReturn").attr("src", json.data);
-                        $('#imageReturn').attr("style", "display:inline");
-                    } else {
-                        $("#result").text(json.msg);
-                    }
-                }
-            });
-        }
-    });
-</script>
-<style type="text/css">
-    .btn {
-        position: relative;
-        display: inline-block;
-        padding: 6px 12px;
-        font-size: 14px;
-        line-height: 1.42857143;
-        text-align: center;
-        vertical-align: middle;
-        font-weight: 400;
-        color: #fff;
-        background-color: #627aad;
-        border: 1px solid #627aad;
-        border-radius: 3px;
-        cursor: pointer;
-    }
-
-    .btn:hover {
-        cursor: pointer;
-    }
-
-    .btn-danger {
-        background-color: #de815c;
-        border-color: #de815c;
-    }
-
-    .image-wrap {
-        overflow: hidden;
-        min-height: 120px;
-        margin-top: 15px;
-        margin-bottom: 15px;
-    }
-</style>
+<script type="text/javascript" src="index.js"></script>
+<link  rel="stylesheet" href="index.css" type="text/css"/>
+<div id="divImg" class="divImg">
+    <div class="divImage">
+        <img src="" id="imageView" class="image" style="display: none">
+    </div>
+    <div class="divImage">
+        <img src="" id="imageReturn" class="image" style="display: none">
+        <span id="result"></span>
+    </div>
+</div>
+<div class="divButton">
+    <label for="upload" class="btn">一键抠图</label>
+    <input type="file" id="upload" style="display: none" name="file" accept="image/jpeg,image/jpg,image/png">
+<!--    <span class="btn btn-danger" id="submit">一键抠图</span>-->
+    <a href="javascript:" class="btn btn-disable" id="download">点击下载</a>
+</div>
 </body>
 </html>

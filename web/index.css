@@ -1,0 +1,81 @@
+a{ text-decoration:none}
+body {
+    background: radial-gradient(white 40%, papayawhip 10%, wheat);;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+.divImg {
+    margin: 50px 20% 0 20%;
+    /*border: black 1px solid;*/
+    height: 400px;
+    background: white;
+    border-radius: 125px 125px;
+
+}
+
+.divImage {
+    position: relative;
+    width: 50%;
+    height: 100%;
+    float: left;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+img {
+    overflow: hidden;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.btn {
+    position: relative;
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 18px;
+    line-height: 1.42857143;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: 400;
+    color: #fff;
+    background-color: #627aad;
+    border: 1px solid #627aad;
+    border-radius: 25px 25px;
+    float: left;
+    margin-right: 19%;
+    margin-left: 20%;
+}
+
+.divButton {
+    position: relative;
+    margin: 10px 20% 0 20%;
+}
+
+.btn:hover {
+    cursor: pointer;
+}
+
+.btn-danger {
+    background-color: #de815c;
+    border-color: #de815c;
+}
+.btn-disable:hover{
+    cursor: default;
+}
+
+.btn-disable {
+    background-color: gray;
+    border-color: gray;
+}
+
+.image {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    display: none;
+}
