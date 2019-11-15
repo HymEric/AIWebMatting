@@ -9,15 +9,15 @@
 ## function
 <h3 font-size: 10px;>
     <p>
-        1.press '一键上传' button and choose file (only&nbsp;&nbsp;.png&nbsp;&nbsp;.jpg&nbsp;&nbsp;.jpeg file is allowed).
-    </p>
-        <p>
-            2.send picture to the backend automatically.
-        </p>
-    <p>
-        3.show the picture after matting.
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.press '一键上传' button and choose file (only&nbsp;&nbsp;.png&nbsp;&nbsp;.jpg&nbsp;&nbsp;.jpeg file is allowed).
     </p>
     <p>
-        4.press '点击下载' button if you want to download.
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.send picture to the backend automatically.
+    </p>
+    <p>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.show the picture after matting.
+    </p>
+    <p>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.press '点击下载' button if you want to download.
     </p>
 </h3>
