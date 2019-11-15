@@ -53,6 +53,7 @@ Content-Type: image/png
 * note: all status false msg is following:(String)
 ```
 invalid_file
+invalid_params
 ```
 
 

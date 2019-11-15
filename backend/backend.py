@@ -45,4 +45,33 @@ def upload():
     })
 
 
+@app.route('/api/v1/synthesis', methods=['GET', 'POST'])
+def synthesis():
+    file = request.files.get('file')
+    if not file:
+        return make_status_false("invalid_file")
+
+    fg_path = request.values.get("fg_path")
+    if not fg_path:
+        return make_status_false("invalid_params")
+
+    base_url = "http://matting.zsyhh.com:4800/download"
+    fg_filename = fg_path[len(base_url) + 1:]
+    if not fg_filename:
+        return make_status_false("invalid_params")
+
+    bg_filename = base64.b64encode(os.urandom(24)).decode('utf-8').replace("/", "_") + ".png"
+    output_filename = base64.b64encode(os.urandom(24)).decode('utf-8').replace("/", "_") + ".png"
+    file.save(os.path.join("/tmp/zju_ai_img/upload", bg_filename))
+
+    measure_pb.image_synthesis(os.path.join("/tmp/zju_ai_img/download", fg_filename),
+                               os.path.join("/tmp/zju_ai_img/upload", bg_filename),
+                               os.path.join("/tmp/zju_ai_img/download", output_filename))
+
+    return json.dumps({
+        "status": True,
+        "data": "http://matting.zsyhh.com:4800/download/{}".format(output_filename)
+    })
+
+
 app.run(host='0.0.0.0', port=80)

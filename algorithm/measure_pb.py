@@ -41,6 +41,27 @@ def make(img_path, mask_path, output_path):
     cv2.imwrite(output_path, img_BGRA)
 
 
+def image_synthesis(foreground_img_path, background_img_path, output_img_path):
+    fore_img = cv2.imread(foreground_img_path, cv2.IMREAD_UNCHANGED).astype(float)
+    back_img = cv2.imread(background_img_path).astype(float)
+
+    w, h, c = fore_img.shape
+    back_img = cv2.resize(back_img, (h, w), interpolation=cv2.INTER_CUBIC)
+
+    b, g, r, alpha = cv2.split(fore_img)
+    alpha = cv2.merge([alpha, alpha, alpha])
+    alpha = alpha.astype(float) / 255
+
+    fore_img = cv2.merge([b, g, r])
+    fore_img = cv2.multiply(alpha, fore_img)
+
+    back_img = cv2.multiply(1.0 - alpha, back_img)
+
+    out_img = cv2.add(fore_img, back_img)
+
+    cv2.imwrite(output_img_path, out_img)
+
+
 def run(input_img_path, output_img_path):
     input_tensor = sess.graph.get_tensor_by_name("image_holder:0")
     output_tensor = sess.graph.get_tensor_by_name("output/score:0")
@@ -73,9 +94,13 @@ def run(input_img_path, output_img_path):
 
 
 if __name__ == "__main__":
-    input_img_path = absolute('inputs/test.png')
-    # mask_output_img_path='./outputs/test_result.png'
-    alpha_img_output_path = absolute('alpha_img_outputs/test_result.png')
-    run(input_img_path, alpha_img_output_path)
+    # input_img_path = absolute('inputs/test.png')
+    # # mask_output_img_path='./outputs/test_result.png'
+    # alpha_img_output_path = absolute('alpha_img_outputs/test_result.png')
+    # run(input_img_path, alpha_img_output_path)
 
     # make(input_img_path,mask_output_img_path,alpha_img_output_path)
+    foreground_img_path = absolute('alpha_img_outputs/test_result.png')
+    background_img_path = absolute('inputs/background.png')
+    output_img_path = absolute('outputs/synthesis.png')
+    image_synthesis(foreground_img_path, background_img_path, output_img_path)
