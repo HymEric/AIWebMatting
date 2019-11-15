@@ -1,4 +1,4 @@
-## This is Web frontend about matting
+## This is Web frontend about project
 
 ## logo
 <div align=center>
