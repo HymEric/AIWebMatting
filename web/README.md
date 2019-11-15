@@ -1,14 +1,23 @@
 ## This is Web frontend about matting
 
-#
-
 ## logo
-![avatar](https://github.com/HymEric/AIWebMatting/blob/master/web/logo.png)
+<div align=center>
+<img src="https://github.com/HymEric/AIWebMatting/blob/master/web/logo.png" width="100" hegiht="100"  />
+<p>AIMatting</p>
+</div>
 
 ## function
-```
-  1.press '一键上传' button and choose file (only .png .jpg .jpeg file allowed).
-  2.send picture to the backend  automatically.
-  3.show the picture after matting.
-  4,press '点击下载' button if you want to download.
-```
+<h3>
+    <p>
+        1.press '一键上传' button and choose file (only .png .jpg .jpeg file allowed).
+    </p>
+        <p>
+            2.send picture to the backend  automatically.
+        </p>
+    <p>
+        3.show the picture after matting.
+    </p>
+    <p>
+        4,press '点击下载' button if you want to download.
+    </p>
+</h3>
