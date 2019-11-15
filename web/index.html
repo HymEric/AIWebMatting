@@ -21,16 +21,24 @@
         <img src="" id="imageReturn2"  style="display: none">
         <span id="result"></span>
     </div>
+    <div class="divImage">
+        <img src="" id="imageAddBg" class="image" style="display: none">
+        <img src="" id="imageAddBg2"  style="display: none">
+    </div>
 </div>
 <div class="div2">
     <div class="divButton">
         <label for="upload" class="btn">一键抠图</label>
         <input type="file" id="upload" style="display: none" name="file" accept="image/jpeg,image/jpg,image/png">
     </div>
-    <!--    <span class="btn btn-danger" id="submit">一键抠图</span>-->
     <div class="divButton">
-        <a href="javascript:" class="btn btn-disable" id="download">点击下载</a>
+        <label for="addBackground" id="addBg" class="btn">增加背景</label>
+        <input type="file" id="addBackground" style="display: none" name="file" accept="image/jpeg,image/jpg,image/png">
     </div>
+    <div class="divButton">
+        <a href="javascript:" class="btn" id="download">点击下载</a>
+    </div>
+
 </div>
 </body>
 </html>

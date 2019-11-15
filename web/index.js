@@ -1,6 +1,9 @@
 //判断是否为Trident内核浏览器(IE等)函数
 
 $(function () {
+    disableButton("download");
+    disableButton("addBg");
+    $("#addBackground").attr("disabled","disabled");
     $("#upload").change(function () {
         var objUrl = $(this)[0].files[0];
         //获得一个http格式的url路径:mozilla(firefox)||webkit or chrome
@@ -12,8 +15,20 @@ $(function () {
         $("#imageView2").attr("src", dataURL);
         fixImage('imageView');
         $('#imageReturn').attr("style", "display:none");
-        $("#download").removeClass('btn-danger').addClass('btn-disable').attr("disabled", true);
+        $('#imageAddBg').attr("style", "display:none");
+        disableButton("download");
+        disableButton("addBackground");
+        $("#addBackground").attr("disabled","disabled");
+        $("#download").text('点击下载');
+        if (browserIsIe()) {
+            $("#download").removeAttr("onclick");
+        } else {
+            $("#download").removeAttr("download").attr("href","");
+        }
         Matting();
+    });
+    $("#addBackground").change(function () {
+        AddBackground();
     });
 });
 
@@ -22,6 +37,46 @@ $(function () {
 function browserIsIe() {
     return (!!window.ActiveXObject || "ActiveXObject" in window);
 }
+
+function AddBackground() {
+    var reader = new FileReader();
+    var file = document.querySelector("#addBackground").files;
+    reader.readAsBinaryString(file[0]);
+    reader.onload = function () {
+        var formData = new FormData();
+        formData.append("file", $("#addBackground")[0].files[0]);
+        formData.append("fg_path", $("#imageReturn2").attr("src"));
+        $.ajax({
+            url: "http://matting.zsyhh.com:4800/api/v1/synthesis",
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (returnData) {
+                var json = JSON.parse(returnData);
+                if (json.status) {
+                    $("#imageAddBg").attr("src", json.data).attr("style", "display:inline");
+                    $("#imageAddBg2").attr("src", json.data);
+                    fixImage('imageAddBg');
+                    if (browserIsIe()) {
+                        $("#download").on("click", function () {
+                            //调用创建iframe的函数
+                            createIframe(json.data);
+                        });
+                    } else {
+                        $("#download").attr("download", json.data).attr("href", json.data);
+                    }
+                    enableButton("download");
+                    $('#download').text('含背景图');
+                } else {
+                    $("#result").text(json.msg);
+                }
+            }
+        });
+    }
+}
+
+
 
 function Matting() {
     var reader = new FileReader();
@@ -50,7 +105,10 @@ function Matting() {
                     } else {
                         $("#download").attr("download", json.data).attr("href", json.data);
                     }
-                    $('#download').removeClass('btn-disable').addClass('btn-danger').attr("disabled",false);
+                    enableButton("download");
+                    enableButton("addBg");
+                    $("#addBackground").removeAttr("disabled");
+                    //$('#download').removeClass('btn-disable').addClass('btn-danger').attr("disabled",false);
                 } else {
                     $("#result").text(json.msg);
                 }
@@ -58,6 +116,7 @@ function Matting() {
         });
     }
 }
+
 
 
 function downloadImg() {
@@ -103,5 +162,12 @@ function _fixImage(url,maxWidth,maxHeight) {
 }
 
 function fixImage(url) {
-    _fixImage(url,440,400);
+    _fixImage(url,300,400);
+}
+
+function disableButton(button){
+    $("#"+button).removeClass('btn-danger').addClass('btn-disable').attr("disabled", true);
+}
+function enableButton(button) {
+    $("#"+button).removeClass('btn-disable').addClass('btn-danger').attr("disabled", false);
 }
