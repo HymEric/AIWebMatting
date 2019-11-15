@@ -1,23 +1,24 @@
 a{ text-decoration:none}
 body {
-    background: radial-gradient(white 40%, papayawhip 10%, wheat);;
+    background: wheat;
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    overflow: hidden;
 }
 
 .logo{
+    position: absolute;
     height: 100px;
     width: 100px;
-    margin: 30px 0 0 30px;
+    margin: 10px 0 0 30px;
 }
 
 .divImg {
-    margin: 50px 20% 0 20%;
-    /*border: black 1px solid;*/
-    height: 400px;
+    margin: 40px 20% 0 20%;
+    border: black 10px solid;
+    height: 600px;
+    width: 930px;
     background: white;
     border-radius: 125px 125px;
 
@@ -65,6 +66,7 @@ body {
 .div2 {
     position: relative;
     margin: 10px 20% 0 20%;
+    width: 930px;
 }
 
 .btn:hover {

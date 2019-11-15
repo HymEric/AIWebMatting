@@ -6,15 +6,18 @@ $(function () {
         //获得一个http格式的url路径:mozilla(firefox)||webkit or chrome
         var windowURL = window.URL || window.webkitURL;
         //createObjectURL创建一个指向该参数对象(图片)的URL
-        var dataURL;
-        dataURL = windowURL.createObjectURL(objUrl);
+        var dataURL = windowURL.createObjectURL(objUrl);
         //把url给图片的src，让其显示
         $("#imageView").attr("src", dataURL).attr("style", "display:inline");
+        $("#imageView2").attr("src", dataURL);
+        fixImage('imageView');
         $('#imageReturn').attr("style", "display:none");
         $("#download").removeClass('btn-danger').addClass('btn-disable').attr("disabled", true);
         Matting();
     });
 });
+
+
 
 function browserIsIe() {
     return (!!window.ActiveXObject || "ActiveXObject" in window);
@@ -36,8 +39,9 @@ function Matting() {
             success: function (returnData) {
                 var json = JSON.parse(returnData);
                 if (json.status) {
-                    $("#imageReturn").attr("src", json.data);
-                    $('#imageReturn').attr("style", "display:inline");
+                    $("#imageReturn").attr("src", json.data).attr("style", "display:inline");
+                    $("#imageReturn2").attr("src", json.data);
+                    fixImage('imageReturn');
                     if (browserIsIe()) {
                         $("#download").on("click", function () {
                             //调用创建iframe的函数
@@ -58,9 +62,8 @@ function Matting() {
 
 function downloadImg() {
     //iframe的src属性不为空,调用execCommand(),保存图片
-    if ($('#IframeReportImg').src !== "about:blank") {
+    if ($('#IframeReportImg').src !== "about:blank")
         window.frames["IframeReportImg"].document.execCommand("SaveAs");
-    }
 }
 
 //创建iframe并赋值的函数,传入参数为图片的src属性值.
@@ -76,4 +79,29 @@ function createIframe(imgSrc) {
         //如指向图片地址,直接调用下载方法
         downloadImg();
     }
+}
+
+function _fixImage(url,maxWidth,maxHeight) {
+    var imgHandle = $('#'+url+'2');
+    var imgSrc = $('#'+url);
+    var imgWidth = imgHandle.width();
+    var imgHeight = imgHandle.height();
+    var imgWH = imgWidth/imgHeight;
+    var maxWH = maxWidth/maxHeight;
+    if(imgWidth >= imgHeight) {
+        if(imgWH <= maxWH)
+            imgSrc.width((imgWidth * maxHeight)/imgHeight).height(maxHeight);
+        else
+            imgSrc.width(maxWidth).height((imgHeight * maxWidth)/imgWidth);
+    }
+    else {
+        if(imgWH >= maxWH)
+            imgSrc.width(maxWidth).height((imgHeight*maxWidth)/imgWidth);
+        else
+            imgSrc.width((imgWidth * maxHeight)/imgHeight).height(maxHeight);
+    }
+}
+
+function fixImage(url) {
+    _fixImage(url,440,400);
 }
