@@ -8,6 +8,12 @@ body {
     overflow: hidden;
 }
 
+.logo{
+    height: 100px;
+    width: 100px;
+    margin: 30px 0 0 30px;
+}
+
 .divImg {
     margin: 50px 20% 0 20%;
     /*border: black 1px solid;*/
@@ -27,7 +33,14 @@ body {
     text-align: center;
 }
 
-img {
+.divButton{
+    position: relative;
+    width: 50%;
+    float: left;
+    text-align: center;
+}
+
+.image {
     overflow: hidden;
     position: absolute;
     left: 50%;
@@ -47,12 +60,9 @@ img {
     background-color: #627aad;
     border: 1px solid #627aad;
     border-radius: 25px 25px;
-    float: left;
-    margin-right: 19%;
-    margin-left: 20%;
 }
 
-.divButton {
+.div2 {
     position: relative;
     margin: 10px 20% 0 20%;
 }

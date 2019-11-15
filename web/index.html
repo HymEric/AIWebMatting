@@ -7,7 +7,10 @@
 <body>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="index.js"></script>
-<link  rel="stylesheet" href="index.css" type="text/css"/>
+<link rel="stylesheet" href="index.css" type="text/css"/>
+<div>
+    <img src="logo.png" class = "logo">
+</div>
 <div id="divImg" class="divImg">
     <div class="divImage">
         <img src="" id="imageView" class="image" style="display: none">
@@ -17,11 +20,15 @@
         <span id="result"></span>
     </div>
 </div>
-<div class="divButton">
-    <label for="upload" class="btn">一键抠图</label>
-    <input type="file" id="upload" style="display: none" name="file" accept="image/jpeg,image/jpg,image/png">
-<!--    <span class="btn btn-danger" id="submit">一键抠图</span>-->
-    <a href="javascript:" class="btn btn-disable" id="download">点击下载</a>
+<div class="div2">
+    <div class="divButton">
+        <label for="upload" class="btn">一键抠图</label>
+        <input type="file" id="upload" style="display: none" name="file" accept="image/jpeg,image/jpg,image/png">
+    </div>
+    <!--    <span class="btn btn-danger" id="submit">一键抠图</span>-->
+    <div class="divButton">
+        <a href="javascript:" class="btn btn-disable" id="download">点击下载</a>
+    </div>
 </div>
 </body>
 </html>
