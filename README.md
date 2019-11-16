@@ -9,3 +9,6 @@ deploy:
 cd docker
 ./build_and_run.sh
 ```
+
+Reminds:
+https://github.com/HymEric/AIWebMatting/blob/master/reminds.md
