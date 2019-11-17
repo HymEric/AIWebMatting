@@ -1,4 +1,4 @@
-## This is Web frontend about project
+## This is Web frontend about project(Editted By Qibin Dai)
 
 ## logo
 <div align=center>
@@ -18,6 +18,15 @@
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.show the picture after matting.
     </p>
     <p>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.press '点击下载' button if you want to download.
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.press '点击下载' button if you want to download the picture matted.
+    </p>
+    <p>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.press '背景融合' button and choose background picture if you want to add new backgound to the picture matted.
+    </p>
+    <p>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6.send backgound picture to the backend.
+    </p>
+    <p>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7.press '含背景图' button if you want to download the picture added backgound.
     </p>
 </h3>
